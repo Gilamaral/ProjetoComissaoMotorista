@@ -1,0 +1,21 @@
+-=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
+           COMISSAO DE MOTORISTAS
+-=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
+
+
+         CodMot  vfrete  diesel  arla       data
+numcte                                         
+2242        74    1800    3500   250 2023-01-01
+2253        74    1800    3500   250 2023-01-01
+2264        74    1800    3500   250 2023-01-01
+2275        74    1800    3500   250 2023-01-01
+2286        74    1800    3500   250 2023-01-01
+2297        74    1800    3500   250 2023-01-01
+
+ vfrete R$10800 - diesel R$21000 - arla R$1500
+
+ A despesa total do motorista foi: R$22500.00
+
+ O faturamento total do motorista foi: R$10800.00
+
+ A comissão total do motorista foi: R$1620.00

@@ -11,9 +11,10 @@ if lancte == 's':
     time.sleep(3)
 
     fim = input('Deseja lançar novo CTE? ')
-
+    
+#grava os dados das viagens executadas
     while True:
-        #grava os dados das viagens executadas
+
         codmot = int(input('Digite o codigo do motorista'))   
         numcte = int(input('Digite o numero do CTE: '))
         vfrete = int(input('Digite o valor do frete: R$'))
@@ -33,6 +34,7 @@ else:
     print('calculando comissão...')
     time.sleep (3)
 
+#Processa calculo de comissão das viagens
 tabpd = pd.read_excel('C:\ProjetosPython\ProjetoComissaoMotorista\BD_Excel\Comissão Motoristas.xlsx')
 tabpd = tabpd.set_index('numcte')
 
@@ -50,42 +52,25 @@ comissao = sum_vfrete * 0.15
 Lista = [sum_vfrete, sum_diesel,sum_arla]
 print('-=-'*20)
 print('-=-'*20)
-print('vfrete R${} - diesel R${} - arla R${}'.format(sum_vfrete,sum_diesel,sum_arla))
+print('vfrete R${:.2f} - diesel R${:.2f} - arla R${:.2f}'.format(sum_vfrete,sum_diesel,sum_arla))
 print('-=-'*20)
 print('# A despesa total do motorista foi: R${:.2f}'.format(desp_total))
 print('-=-'*20)
 print('# O faturamento total do motorista foi: R${:.2f}'.format(sum_vfrete))
 print('-=-'*20)
-print('# A comissão total do motorista foi: R${:.2f}'.format(comissao))
+print('# A comissao total do motorista foi: R${:.2f}'.format(comissao))
 print('-=-'*20)
 print('-=-'*20)
-'''
 
-
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-
-def pontos (mm):
-    return mm / 0.352777
-
-
-pdf = canvas.Canvas ('./teste.pdf', pagesize=A4)
-
-txttitulo = 'COMISSÃO MOTORISTA'
-pdf.setFont('Helvetica-Oblique', 24)
-pdf.drawString(pontos(90), pontos(270), txttitulo)
-
-txttabela = tabpd
-pdf.setFont('Helvetica-Oblique', 24)
-pdf.drawString(pontos(90), pontos(220), txttabela)
-
-txtdespesas = Lista
-pdf.setFont('Helvetica-Oblique', 24)
-pdf.drawString(pontos(90), pontos(200), txtdespesas)
-
-txtcomissao = comissao
-pdf.setFont('Helvetica-Oblique', 24)
-pdf.drawString(pontos(90), pontos(150), txtcomissao)
-
-
-pdf.save()'''
+#Grava resultado da comissão em arquivo de texto
+with open('rascunho.txt', 'w') as arquivo:
+    arquivo.write(str('-=-'*16)) 
+    arquivo.write('\n           COMISSAO DE MOTORISTAS')
+    arquivo.write(str('\n'))  
+    arquivo.write(str('-=-'*16))    
+    arquivo.write('\n\n\n {}'.format(tabpd))   
+    arquivo.write('\n\n vfrete R${} - diesel R${} - arla R${}'.format(sum_vfrete,sum_diesel,sum_arla))
+    arquivo.write('\n\n A despesa total do motorista foi: R${:.2f}'.format(desp_total))
+    arquivo.write('\n\n O faturamento total do motorista foi: R${:.2f}'.format(sum_vfrete))
+    arquivo.write('\n\n A comissão total do motorista foi: R${:.2f}'.format(comissao))
+    
