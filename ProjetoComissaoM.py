@@ -10,7 +10,7 @@ if lancte == 's':
     print('lançando cte...!')
     time.sleep(3)
 
-    '''fim = input('Deseja lançar novo CTE? ')
+    fim = input('Deseja lançar novo CTE? ')
 
     while True:
         #grava os dados das viagens executadas
@@ -28,8 +28,7 @@ if lancte == 's':
         print('Lançamento Finalizado!')
         fim = input('Deseja continuar lançando CTE? ')
         if fim == 'n':
-        break'''
-
+            break
 else:
     print('calculando comissão...')
     time.sleep (3)
