@@ -1,0 +1,44 @@
+
+tutoriais
+
+https://www.w3schools.com/python/python_mysql_update.asp
+
+
+#  Exemplo de criação de tabela
+
+use cadastro (cadastro =  banco de dados)
+create table pessoas(
+id int not null auto_increment,
+nome varchar (30) not null,
+nascimento date,
+sexo enum ('M', 'F'),
+peso decimal (5,2),
+altura decimal (3,2),
+nacionalidade varchar (20) default 'Brasil',
+primary key (id)
+) default charset utf8mb4;
+
+#  inserindo dados na tabela
+
+insert into pessoas
+(nome, nascimento, sexo, peso, altura, nacionalidade)
+values
+('godofredo', '1984-01-02', 'M', '78.5','1.83', 'Brasil');
+
+#  Ou asim sem o insert estiver na ordem da tabela
+insert into pessoas values
+(default,'Adalgiza', '1970-01-02', 'F', '65.5','1.65', default);
+
+# Incluir colunas na tabela
+Alter table pessoas
+add column profissao varchar (10);
+
+alter table pessoas
+add column profissao varchar (10) after nome;
+
+alter table pessoas
+add column profissao varchar (10) first;
+
+# excluir colunas na tabela
+Alter table pessoas
+drop column profissao;

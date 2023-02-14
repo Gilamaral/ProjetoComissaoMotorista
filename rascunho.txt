@@ -1,21 +1,15 @@
--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
-           COMISSAO DE MOTORISTAS
--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
+insert into cte
+(codmot, datacte, numcte, v_frete, V_varla, v_pneu, v_oficina, V_desp_viagem, v_outras_desp)
+values
+('74'  ,'2023-01-01'  ,'2243' ,'3500.00','25000.00','100.00', '100.00'  , '100.00'      , '100.00'),
 
+conex = mysql.connector.connect (
+    host ='localhost',
+    user = 'root',
+    passwd = 'dulguiga16',
+    database = 'comissaom'
+    )
 
-         CodMot  vfrete  diesel  arla       data
-numcte                                         
-2242        74    1800    3500   250 2023-01-01
-2253        74    1800    3500   250 2023-01-01
-2264        74    1800    3500   250 2023-01-01
-2275        74    1800    3500   250 2023-01-01
-2286        74    1800    3500   250 2023-01-01
-2297        74    1800    3500   250 2023-01-01
-
- vfrete R$10800 - diesel R$21000 - arla R$1500
-
- A despesa total do motorista foi: R$22500.00
-
- O faturamento total do motorista foi: R$10800.00
-
- A comissão total do motorista foi: R$1620.00
+conexao = conex.cursor()
+if conex.is_connected():
+    print('conectado')
