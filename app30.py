@@ -1,5 +1,5 @@
-from app30 import Bdenvio
+a = b = 1, c = 2  
 
+x, y = 5, 0  
 
-teste = app.Bdenvio()
-print(teste)
+name = "João da Silva" 
