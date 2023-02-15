@@ -8,9 +8,7 @@ mybd = mysql.connector.connect(
     passwd='dulguiga16',
     database='comissaom'
 )
-
 mycursor = mybd.cursor()
-
 if mybd.is_connected():
     print('conectado')
 
