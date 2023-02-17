@@ -17,6 +17,8 @@ def janela_pedido():
     ]
     return sg.Window('Montar Pedido', layout=layout, finalize=True)
 
+
+
 janela1, janela2 = janela_login(), None
 
 while True:
