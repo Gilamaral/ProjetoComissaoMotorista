@@ -1,46 +1,30 @@
 import pandas as pd
 import mysql.connector
 
+senhahost = 'dulguiga16'
+
 mybd = mysql.connector.connect(
     host='localhost',
     user='root',
-    passwd='dulguiga16',
+    passwd= senhahost,
     database='comissaom'
 )
-
 mycursor = mybd.cursor()
-
 if mybd.is_connected():
     print('conectado')
 
-tabpd = ('select * from cte;')
+
+tabpd = ('select codmot, sum(v_frete) as faturado, sum(V_varla) + sum(diesel) as combustivel, sum(V_desp_viagem) as desp_viag , sum(v_pneu) + sum(v_oficina) + sum(v_outras_desp) as out_desp, (sum(v_frete) - ( sum(V_varla) + sum(diesel) + sum(V_desp_viagem) + sum(v_pneu) + sum(v_oficina) + sum(v_outras_desp))) * 0.15 as comissao from cte group by codmot order by codmot;')
 df = pd.read_sql(tabpd, mybd)
-tabcomissao = pd.DataFrame(df)
+tabpd1 = pd.DataFrame(df)
 
-lancar = 's'
 
-while True:
+for i in tabpd1.index:
+    grav = int(tabpd1['codmot'][i]), int(tabpd1['faturado'][i]), int(tabpd1['combustivel'][i]), int(tabpd1['desp_viag'][i]), int(tabpd1['out_desp'][i]), int(tabpd1['comissao'][i])
 
-    if lancar == 's':
-        #
-        cst_codmot = int(input('Digite o codigo do motorista: '))
-        tabpd = tabcomissao.loc[tabcomissao['codmot'] == cst_codmot]
-        
-        faturado = tabpd['v_frete'].sum()
-        desp_viag = tabpd['V_desp_viagem'].sum()
-        out_desp = tabpd['V_varla'].sum()
-        diesel = tabpd['diesel'].sum()
-        arla = tabpd['V_varla'].sum()
-        combustivel = float(diesel + arla)
-        comissao = faturado * 0.15
+    query = "INSERT INTO comissao (codmot, faturado, combustivel, desp_viag, out_desp, comissao) VALUES (%s,%s,%s,%s,%s,%s)"
+    gravarlista = (grav)
 
-        gravar = "INSERT INTO comissao (codmot, faturado, combustivel,  desp_viag, out_desp, comissao) VALUES (%s,%s,%s,%s,%s,%s)"
-        lista = (cst_codmot, faturado, combustivel, desp_viag, out_desp, comissao)
-
-        mycursor.execute(gravar, lista)
-        mybd.commit()
-        print(mycursor.rowcount, "record inserted.")
-        lancar = str(input('Gerar comissão de outro motorista [s/n]? '))
-    else:
-        print('Lançamento finalizado!')
-        break
+    mycursor.execute(query, gravarlista)
+    mybd.commit()
+    print(mycursor.rowcount, "record inserted.")
