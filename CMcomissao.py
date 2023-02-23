@@ -8,14 +8,14 @@ def Geracom():
     mybd = mysql.connector.connect(
         host='localhost',
         user='root',
-        passwd= senhahost,
+        passwd = senhahost,
         database='comissaom'
     )
     mycursor = mybd.cursor()
     if mybd.is_connected():
         print('conectado')
 
-
+    
     tabpd = ('select codmot, sum(v_frete) as faturado, sum(V_varla) + sum(diesel) as combustivel, sum(V_desp_viagem) as desp_viag , sum(v_pneu) + sum(v_oficina) + sum(v_outras_desp) as out_desp, (sum(v_frete) - ( sum(V_varla) + sum(diesel) + sum(V_desp_viagem) + sum(v_pneu) + sum(v_oficina) + sum(v_outras_desp))) * 0.15 as comissao from cte group by codmot order by codmot;')
     df = pd.read_sql(tabpd, mybd)
     tabpd1 = pd.DataFrame(df)
@@ -38,7 +38,6 @@ def Geracom():
 
 
 def Limpacom():
-    import pandas as pd
     import mysql.connector
 
     senhahost = 'dulguiga16'
@@ -62,3 +61,4 @@ def Limpacom():
         mybd.close()
         print('desconectado')
     return
+

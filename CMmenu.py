@@ -3,6 +3,7 @@ def Menu():
     import CMlancar as lc
     import CMcomissao as cm
     import CMrelatorio as rt
+    import CMcomissao_interface as lci
     import os
 
     os.system('cls')
@@ -28,7 +29,8 @@ def Menu():
     else:
 
         if programa == 1:
-            lc.LancarCte()
+            lci.LancarCte()
+            #lc.LancarCte()
             os.system('cls')
             Menu()
 
@@ -36,6 +38,13 @@ def Menu():
             cm.Geracom()
             os.system('cls')
             Menu()
+
+
+        if programa == 3:
+            cm.Limpacom()
+            os.system('cls')
+            Menu()
+
 
         if programa == 4:
             lc.CadastroM()
