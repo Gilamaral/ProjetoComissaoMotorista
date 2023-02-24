@@ -1,22 +1,17 @@
-import PySimpleGUI as sg
-import pandas as pd
-import mysql.connector
+from tkinter import *
 
-
-senhahost = 'dulguiga16'
-
-mybd = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    passwd= senhahost,
-    database='comissaom'
-)
-
-mybd.cursor()
-df = pd.read_sql('select * from comissao;', mybd)
-tab2 = df.set_index('codmot')
-sg.popup(tab2, title='teste', font=('', 10,''), line_width=1200)
+class Grid( Frame ):
  
-if mybd.is_connected():
-    mybd.close()
-    print('desconectado')    
+ def __init__(self):
+  # Inicializando o frame 
+  Frame.__init__(self)
+  self.master.title("Grid")
+  self.master.geometry( "80x80" )
+  
+  # Criando os labels e adicionando
+  # com o método grid()
+  for linha in range(3):
+   for coluna in range(3):
+    Label(self.master, text=str(linha)+','+str(coluna)).grid(row=linha,column=coluna)
+  
+  mainloop()

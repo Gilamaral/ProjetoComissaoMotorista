@@ -1,33 +1,43 @@
 def Menu2():
     
     import PySimpleGUI as sg
-    import CMcomissao_interface as lci
+    import CMlancar_interface as lci
+    import CMrelatorio_intertface as rel
+    import CMcomissao as co
 
 
-    menu_def =  [
-                ['cadastro',['clientes', 'motoristas']],
-                ['relatorio'],
-                ['venda']
-                ]
+    layout = [[sg.Menu([['Cadastro',['Clientes', 'Motoristas']],
+                        ['Relatorio',['Viagens', 'Comissão']],
+                        ['Dados',['Limpar comissao','Gerar comissao']],
+                        ['Venda']], text_color='black', font=9, pad=(10,10))],
+              [sg.Text('.', size=(70,25))],
+              ]
 
-
-    layout = [[sg.Menu(menu_def, text_color='black', font="SYSTEM_DEFAULT", pad=(10,10))],
-              [sg.Text('.', size=(80,10))] 
-            ]
-
-    window =sg.Window('Menu Example', layout)
+    window =sg.Window('Gerador de Comissão para Motoristas', layout)
 
     while True:
-        event,values=window.read()
+        event, values = window.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
+                window.close()
                 break
         
         else:
 
-            if event == 'motoristas':
+            if event == 'Motoristas':
                 lci.LancarCte()
-                Menu2()
-    window.close()           
+            
+            if event == 'Viagens':
+                rel.ViagemMtela()
+            
+            if event == 'Comissão':
+                rel.ComissaoMtela()
+            
+            if event == 'Limpar comissao':
+                co.Limpacom()
+            
+            if event == 'Gerar comissao':
+                co.Geracom()
+                
     return
 
 Menu2()

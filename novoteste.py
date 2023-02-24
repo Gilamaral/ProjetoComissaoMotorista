@@ -1,65 +1,26 @@
-import pandas as pd
-import mysql.connector
-import PySimpleGUI as sg
+from tkinter import * 
+from tkinter.ttk import *
 
 
 
-def ViagemM():
-    
+master = Tk() 
+l1 = Label(master, text = 'teste') 
+l2 = Label(master, text = "Width") 
+l1.grid(row = 0, column = 0, sticky = W, pady = 2) 
+l2.grid(row = 1, column = 0, sticky = W, pady = 2) 
+e1 = Entry(master) 
+e2 = Entry(master) 
+e1.grid(row = 0, column = 1, pady = 2) 
+e2.grid(row = 1, column = 1, pady = 2) 
+c1 = Checkbutton(master, text = "Preserve") 
+c1.grid(row = 2, column = 0, sticky = W, columnspan = 2) 
+#img = PhotoImage(file = r"C:\Users\Admin\Pictures\capture1.png") 
+#img1 = img.subsample(2, 2) 
+#Label(master, image = img1).grid(row = 0, column = 2, 
+#       columnspan = 2, rowspan = 2, padx = 5, pady = 5) 
+b1 = Button(master, text = "Zoom in") 
+b2 = Button(master, text = "Zoom out") 
+b1.grid(row = 2, column = 2, sticky = E) 
+b2.grid(row = 2, column = 3, sticky = E) 
+mainloop() 
 
-    senhahost = 'dulguiga16'
-   
-    mybd = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd= senhahost,
-        database='comissaom'
-    )
-    mybd.cursor()
-    
-   
-    df = pd.read_sql_query('select * from cte where codmot = 32;', mybd)
-    tab2 = df.set_index('codmot')
-    lista = tab2
-
-    layout = [
-            [sg.Multiline(size= (150, 200),default_text= df,)]
-            #[ps.Output(size= (80, 30),s=(lista))]
-             ]
-
-    if mybd.is_connected():
-        mybd.close()
-        
-    return sg.Window('cte', element_justification='center', layout=layout, size=(700, 300), finalize=True)
-
-    
-
-ViagemM()
-
-while True:
-    window, event, values = sg.read_all_windows()
-
-'''
-import PySimpleGUI as ps
-
-
-def tela_ini():
-    """
-    -> Cria a janela inicial do programa.
-    :return: Sem retorno.
-    """
-    lista = 'teste','teste'
-
-    layout = [
-            [ps.Multiline(size= (80, 30),default_text= lista,)]
-            #[ps.Output(size= (80, 30),s=(lista))]
-             ]
-
-
-    return ps.Window('HealthCalc', icon='logo.ico', element_justification='center', layout=layout, size=(552, 300), finalize=True)
-
-tela_ini()
-while True:
-    window, event, values = ps.read_all_windows()
-'''
-    
