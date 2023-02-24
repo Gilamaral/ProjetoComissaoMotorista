@@ -3,7 +3,7 @@ def Menu2():
     import PySimpleGUI as sg
     import CMlancar_interface as lci
     import CMrelatorio_intertface as rel
-    import CMcomissao as co
+    import CMcomissao_interface as co
 
 
     layout = [[sg.Menu([['Cadastro',['Clientes', 'Motoristas']],
