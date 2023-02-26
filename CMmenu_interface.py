@@ -6,7 +6,7 @@ def Menu2():
     import CMcomissao_interface as co
 
 
-    layout = [[sg.Menu([['Cadastro',['Clientes', 'Motoristas']],
+    layout = [[sg.Menu([['Cadastro',['Dados cte', 'Motoristas']],
                         ['Relatorio',['Viagens', 'Comissão']],
                         ['Dados',['Limpar comissao','Gerar comissao']],
                         ['Venda']], text_color='black', font=9, pad=(10,10))],
@@ -23,7 +23,7 @@ def Menu2():
         
         else:
 
-            if event == 'Motoristas':
+            if event == 'Dados cte':
                 lci.LancarCte()
             
             if event == 'Viagens':
