@@ -1,15 +1,15 @@
 def Menu2():
     
     import PySimpleGUI as sg
-    import CMlancar_interface as lci
+    import CMcadastros_interface as lci
     import CMrelatorio_intertface as rel
-    import CMcomissao_interface as co
+    import CMprocess_interface as co
 
 
-    layout = [[sg.Menu([['Cadastro',['Dados cte', 'Motoristas']],
-                        ['Relatorio',['Viagens', 'Comissão']],
-                        ['Dados',['Limpar comissao','Gerar comissao']],
-                        ['Venda']], text_color='black', font=9, pad=(10,10))],
+    layout = [[sg.Menu([['Cadastros',['Lançar cte', 'Motoristas', 'Veiculos', 'Pneus', 'Combustivel','Peças']],
+                        ['Relatorios',['Viagens', 'Comissão', 'Veículo', 'Pneus', 'Peças']],
+                        ['Processamento de Dados',['Limpar Comissao','Gerar Comissao']],
+                        ['Consultas',['Pneus','Peças','Combustive','veículo']]], text_color='black', font=9, pad=(10,10))],
               [sg.Text('.', size=(70,25))],
               ]
 
@@ -23,7 +23,7 @@ def Menu2():
         
         else:
 
-            if event == 'Dados cte':
+            if event == 'Lançar cte':
                 lci.LancarCte()
             
             if event == 'Viagens':
@@ -32,12 +32,14 @@ def Menu2():
             if event == 'Comissão':
                 rel.ComissaoMtela()
             
-            if event == 'Limpar comissao':
+            if event == 'Limpar Comissao':
                 co.Limpacom()
             
-            if event == 'Gerar comissao':
+            if event == 'Gerar Comissao':
                 co.Geracom()
                 
     return
+
+
 
 Menu2()

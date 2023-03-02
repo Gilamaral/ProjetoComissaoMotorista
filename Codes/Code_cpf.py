@@ -77,3 +77,5 @@ def TelaCpf():
         [sg.Button('Enviar dados')]
     ]
     return sg.Window('Validar cpf', layout=layout, finalize=True, size=(250, 120))
+
+

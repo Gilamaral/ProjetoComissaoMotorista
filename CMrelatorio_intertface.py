@@ -1,128 +1,52 @@
-def Cst_ViagemM():
-    
-    import PySimpleGUI as sg
-
-    layout = [[sg.Text('Digite o codigo do motorista: '), sg.Input(size=(5,0), key='mot')],
-              [sg.Button('OK')]
-              ]
-    sg.Window(title='Consulta Viagem', layout=layout, finalize=True)
-    
-    while True:
-        window, event, values = sg.read_all_windows()
-        codmot = values['mot']
-        if event == 'OK':
-            window.close()
-            break
-
 def ViagemM():
     import pandas as pd
-    import mysql.connector
     import PySimpleGUI as sg
+    import CMtelas_interface as cv
+    import CMbd_interface as co
     
-    layout = [[sg.Text('Digite o codigo do motorista: '), sg.Input(size=(5,0), key='mot')],
-              [sg.Button('OK')]
-              ]
-    sg.Window(title='Consulta Viagem', layout=layout, finalize=True)
-    
-    while True:
-        window, event, values = sg.read_all_windows()
-        codmot = values['mot']
-        if event == 'OK':
-            window.close()
-            break
-
-    senhahost = 'dulguiga16'
-   
-    mybd = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd= senhahost,
-        database='comissaom'
-    )
-    codmot = int(codmot)
-    mybd.cursor()
-    df = pd.read_sql('select * from cte;', mybd)
+    codmot = int(cv.Cst_mot())
+    select = ('select * from cte;')
+    co.Consult_dados(select)
+    df = co.Consult_dados(select)
     df = df.loc[(df['codmot'] == codmot)]
     df = pd.DataFrame(df)
+    #print(df)
+
+
     sg.popup(df, title='Relatorio de viagens realizadas', font=('', 10,''), line_width=1200)
-
-    df = df.to_excel('Viagens.xlsx')
-
-    if mybd.is_connected():
-        mybd.close()    
-        
-    return
 
 
 def ComissaoM():
     import pandas as pd
     import PySimpleGUI as sg
-    import mysql.connector
-
-    layout = [[sg.Text('Digite o codigo do motorista: '), sg.Input(size=(5,0), key='mot')],
-              [sg.Button('OK')]
-              ]
-    sg.Window(title='Consulta Viagem', layout=layout, finalize=True)
+    import CMtelas_interface as cv
+    import CMbd_interface as co
     
-    while True:
-        window, event, values = sg.read_all_windows()
-        codmot = values['mot']
-        if event == 'OK':
-            window.close()
-            break
-
-    senhahost = 'dulguiga16'
-
-    mybd = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd= senhahost,
-        database='comissaom'
-    )
-    #codmot = int(codmot)
-    mybd.cursor()
-    df = pd.read_sql_query('select * from comissao;', mybd)
+    codmot = str(cv.Cst_mot())
+    select = ('select * from comissao;')
+    co.Consult_dados(select)
+    df = co.Consult_dados(select)
     df = df.loc[(df['codmot'] == codmot)]
     df = pd.DataFrame(df)
-    sg.popup(df, title='Relatório de Comissões', font=('', 10,''), line_width=1200)
+    #print(df)
     
-    #df.to_excel('Comissao.xlsx')
-
-    if mybd.is_connected():
-        mybd.close()
-        #print('desconectado')
-    return
+    sg.popup(df, title='Relatório de Comissões', font=('', 10,''), line_width=1200)
 
 
 def ViagemMtela():
 
     import pandas as pd
-    import mysql.connector
     import PySimpleGUI as sg
-
-    layout = [[sg.Text('Digite o codigo do motorista: '), sg.Input(size=(5,0), key='mot')],
-            [sg.Button('OK')]
-            ]
-    sg.Window(title='Consulta Viagem', layout=layout, finalize=True)
+    import CMtelas_interface as cv
+    import CMbd_interface as co
     
-    while True:
-        window, event, values = sg.read_all_windows()
-        codmot = values['mot']
-        if event == 'OK':
-            window.close()
-            break
-       
-    mybd = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd='dulguiga16',
-        database='comissaom'
-    )
-    mybd.cursor()
-    codmot = int(codmot)
-    df = pd.read_sql_query('select * from cte;', mybd)
+    codmot = int(cv.Cst_mot())
+    select = ('select * from cte;')
+    co.Consult_dados(select)
+    df = co.Consult_dados(select)
     df = df.loc[(df['codmot'] == codmot)]
     df = pd.DataFrame(df)
+    #print(df)
 
     tabela = [[sg.Multiline(size=(90, 15), default_text=df,)]]
 
@@ -135,37 +59,17 @@ def ViagemMtela():
             break
 
 
-    if mybd.is_connected():
-        mybd.close()
-
-
 def ComissaoMtela():
 
     import pandas as pd
-    import mysql.connector
     import PySimpleGUI as sg
-
-    layout = [[sg.Text('Digite o codigo do motorista: '), sg.Input(size=(5,0), key='mot')],
-            [sg.Button('OK')]
-            ]
-    sg.Window(title='Consulta Viagem', layout=layout, finalize=True)
+    import CMtelas_interface as cv
+    import CMbd_interface as co
     
-    while True:
-        window, event, values = sg.read_all_windows()
-        codmot = values['mot']
-        if event == 'OK':
-            window.close()
-            break
-       
-    mybd = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        passwd='dulguiga16',
-        database='comissaom'
-    )
-    mybd.cursor()
-    codmot = codmot
-    df = pd.read_sql_query('select * from comissao;', mybd)
+    codmot = str(cv.Cst_mot())
+    select = ('select * from comissao;')
+    co.Consult_dados(select)
+    df = co.Consult_dados(select)
     df = df.loc[(df['codmot'] == codmot)]
     df = pd.DataFrame(df)
 
@@ -178,8 +82,3 @@ def ComissaoMtela():
         if event in (sg.WIN_CLOSED, 'Exit'):
             window.close()
             break
-
-
-    if mybd.is_connected():
-        mybd.close()
-
