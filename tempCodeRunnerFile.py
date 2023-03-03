@@ -1,1 +1,2 @@
-import PySimpleGUI as sg
+
+                    auto_size_columns=False,
