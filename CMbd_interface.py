@@ -4,11 +4,15 @@ def Insert_dados(gravar, lista):
     import mysql.connector
 
     mybd = mysql.connector.connect(
-                    host='localhost',
-                    user='root',
-                    passwd='dulguiga16',
-                    database='comissaom'
+                    host='web128.f1.k8.com.br',
+                    user='apptruckar',
+                    passwd='',
+                    database='apptruckar'
     )
+
+    if mybd.is_connected():
+        print('conectado')
+
 
     mycursor = mybd.cursor()
 
@@ -23,10 +27,10 @@ def Consult_dados(select):
     import pandas as pd
 
     mybd = mysql.connector.connect(
-                    host='localhost',
-                    user='root',
-                    passwd='dulguiga16',
-                    database='comissaom'
+                    host='web128.f1.k8.com.br',
+                    user='apptruckar',
+                    passwd='',
+                    database='apptruckar'
     )
     
     tb = (select)
@@ -42,10 +46,10 @@ def Delet_dados(delet):
     import mysql.connector
     
     mybd = mysql.connector.connect(
-                    host='localhost',
-                    user='root',
-                    passwd='dulguiga16',
-                    database='comissaom'
+                    host='web128.f1.k8.com.br',
+                    user='apptruckar',
+                    passwd='',
+                    database='apptruckar'
     )
     mycursor = mybd.cursor()
     tb = (delet)
@@ -53,3 +57,5 @@ def Delet_dados(delet):
     mybd.commit()
     
     mybd.close()
+
+
